@@ -11,7 +11,7 @@ const bot = new TelegramBot(token, {polling:
 const express = require('express')
 
 const app = express()
-const PORT = 3010
+let PORT = 3010
 
 app.get('/', (req, res) => {
     res.send('Hello debug_Yourself')
@@ -19,7 +19,7 @@ app.get('/', (req, res) => {
 
 app.listen(PORT, () => console.log(`My server is running on port ${PORT}`))
 
-let htmlContent = 
+let htmlContentOriginal = 
 `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -196,8 +196,7 @@ let htmlContent =
             <img src="https://i.pinimg.com/originals/c5/4c/3b/c54c3b22a044e74edd87094ea8084614.jpg">
         </div>
         <div id="about">
-            Здесь можно составить описание вашего дела или просто написать что-то хорошее 
-            :)
+            Здесь можно составить описание вашего дела или просто написать что-то хорошее :)
         </div>
     </div>
     <div id="contact-bottom">
@@ -214,6 +213,7 @@ let htmlContent =
 </body>
 </html>`;
 
+let htmlContent = htmlContentOriginal
 
 const commands = [
     {
@@ -349,8 +349,7 @@ bot.onText(/\/description/, async msg => {
         bot.on('text', async msg =>{
             try{
                 let userInput = msg.text
-                htmlContent = htmlContent.replace(`Здесь можно составить описание вашего дела или просто написать что-то хорошее 
-                :)`, userInput)
+                htmlContent = htmlContent.replace(`Здесь можно составить описание вашего дела или просто написать что-то хорошее :)`, userInput)
                 console.log('Описание успешно добавлено!')
             }
             catch(err){
@@ -437,6 +436,14 @@ bot.onText(/\/save/, async msg => {
         catch(err){
             console.error()
         }
+        htmlContent = htmlContentOriginal
+        try{
+            await bot.sendMessage(msg.chat.id, 'Для работы со следующим проектом требуется перезапуск бота🙏🏻')
+        }
+        catch(err){
+            console.error()
+        }
+        bot.close()
     }
     catch(err){
         console.error()
