@@ -62,7 +62,7 @@ bot.onText(/\/adore/, async(msg) => {
 
 bot.onText(/\/start/, async msg => {
     try{
-        await bot.sendPhoto(msg.chat.id, 'https://mykaleidoscope.ru/x/uploads/posts/2022-10/1666235211_15-mykaleidoscope-ru-p-uvlekayushchiisya-chelovek-oboi-19.jpg',
+        await bot.sendPhoto(msg.chat.id, 'https://github.com/hellbruh/tgbot-to-site/blob/main/presentation-template.jpg',
         {
             caption:'Привет, я бесплатно создам для тебя небольшой лендинг, который поможет твоему делу. Вот пример того, что может получиться, тебе достаточно заполнить шаблонные поля'
         }
